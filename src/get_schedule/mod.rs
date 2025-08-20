@@ -4,7 +4,6 @@ mod utils;
 pub use find_schedule_url::find_schedule_url;
 
 use reqwest::blocking::Client;
-use std::{fs, path::Path};
 
 use crate::get_schedule::{find_schedule_url::FindUrlError, utils::{curl_bytes}};
 
@@ -14,9 +13,9 @@ fn get_client() -> Client {
         .build().expect("Build client")
 }
 
-pub fn get_schedule_pdf() -> Result<Vec<u8>, FindUrlError> {
+pub fn get_schedule_pdf() -> Result<(Vec<u8>, String), FindUrlError> {
     let client = get_client();
 
     let schedule_url = find_schedule_url(&client)?;
-    Ok(curl_bytes(&client, &schedule_url)?)
+    Ok((curl_bytes(&client, &schedule_url)?, schedule_url))
 }

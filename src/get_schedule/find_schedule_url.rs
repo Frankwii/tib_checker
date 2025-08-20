@@ -30,6 +30,13 @@ impl fmt::Display for FindUrlError {
     }
 }
 
+impl From<FindUrlError> for anyhow::Error {
+    fn from(value: FindUrlError) -> Self {
+        Self::msg(value.to_string())
+    }
+}
+
+
 fn curl_tib_user_page(client: &Client) -> Result<String, reqwest::Error> {
     curl_text(client, TIB_USER_PAGE_URL)
 }

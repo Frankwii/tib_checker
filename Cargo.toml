@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+anyhow = "1.0.99"
 reqwest = { version = "0.12.23", features = ["blocking"] }
+rusqlite = "0.37.0"
 soup = "0.5.1"
-sqlite = "0.37.0"
